@@ -11,7 +11,7 @@ class Transaction(models.Model):
                              ,related_name='sended')
     receiver = models.ForeignKey(User,on_delete=models.CASCADE
                              ,related_name='received')
-    money = models.IntegerField()
+    money = models.FloatField()
     date = models.DateTimeField(auto_now_add=True)
     destination = models.CharField(max_length=20,
                           choices=(('0','Gift'),('1','Borrow'),('2','Lend'),('3','Payment'))

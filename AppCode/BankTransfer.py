@@ -25,10 +25,10 @@ def last_transaction():
         bs(session.get(url+'last').text,'lxml').find('body').text.split()
         try:
             pk,summ = bs(session.get(url+'last').text,'lxml').find('body').text.split()
-            return tuple(map(int,[pk,summ]))
+            return (int(pk),float(summ))
         except ValueError:
             pk,summ,destin = bs(session.get(url+'last').text,'lxml').find('body').text.split()
-            return tuple(map(int,[pk,summ]))+(destin,)
+            return (int(pk),float(summ),destin)
     except:
         return (None,None)
 def account_now():
@@ -79,7 +79,7 @@ class Main:
             self.mFrame.after(self.period, self.changeLabel) #it'll call itself continuously
     def transfer(self):
         receiver_id = int(self.receiver.get())
-        summ = int(self.summ.get())
+        summ = float(self.summ.get())
         self.news.config(state='normal')
         if summ>self.current_sum:
             self.news.insert(END,'You have not enough money\n\n')
